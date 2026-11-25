@@ -19,4 +19,5 @@ Set-Location (Join-Path $root "backend")
 # Windows'ta uzun TEMP yolu NIO loopback (unix domain socket) bağlantısını bozabiliyor; kısa dizin kullanılır.
 $udsDir = "C:\tmp\jdk"
 New-Item -ItemType Directory -Force $udsDir | Out-Null
-& .\mvnw.cmd -o -q spring-boot:run "-Dspring-boot.run.jvmArguments=-Djdk.net.unixdomain.tmpdir=C:/tmp/jdk"
+& .\mvnw.cmd -q spring-boot:run "-Dspring-boot.run.jvmArguments=-Djdk.net.unixdomain.tmpdir=C:/tmp/jdk"
+exit $LASTEXITCODE
