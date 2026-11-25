@@ -1,0 +1,658 @@
+@use "tokens" as *;
+
+// ── Genel ─────────────────────────────────────────────────
+.narrow {
+  width: 100%;
+  max-width: 760px;
+  display: flex;
+  flex-direction: column;
+  gap: var(--s4);
+  min-width: 0;
+}
+
+.sectionTitle {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--s2);
+  margin: var(--s2) 0 0;
+
+  h2 {
+    font-size: var(--fs-lg);
+    font-weight: 800;
+    margin: 0;
+  }
+}
+
+.meta {
+  font-size: var(--fs-sm);
+  color: var(--ink-3);
+}
+
+.wrap {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--s2);
+  min-width: 0;
+}
+
+.grow {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.quote {
+  font-size: var(--fs-sm);
+  overflow-wrap: anywhere;
+}
+
+// ── Sekmeler ─────────────────────────────────────────────
+.tabs {
+  display: flex;
+  gap: 2px;
+  border-bottom: 1px solid var(--line);
+  overflow-x: auto;
+  scrollbar-width: none;
+  max-width: 100%;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+.tab {
+  appearance: none;
+  border: 0;
+  background: transparent;
+  padding: var(--s3) 14px;
+  min-height: var(--tap);
+  font: inherit;
+  font-weight: 700;
+  font-size: 14px;
+  color: var(--ink-3);
+  border-bottom: 2.5px solid transparent;
+  white-space: nowrap;
+  display: inline-flex;
+  gap: 6px;
+  align-items: center;
+  cursor: pointer;
+
+  &:focus-visible {
+    @include focus-ring;
+  }
+}
+
+.tabOn {
+  color: var(--ink);
+  border-bottom-color: var(--brand);
+}
+
+.tabCount {
+  font-size: 11px;
+  background: var(--surface-sunken);
+  border-radius: var(--r-sm);
+  padding: 1px 6px;
+  color: var(--ink-2);
+}
+
+// ── Sefer kartı ──────────────────────────────────────────
+.tripCard {
+  @include card;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 14px 16px;
+  text-decoration: none;
+  color: inherit;
+  min-width: 0;
+
+  &:hover {
+    border-color: var(--line-strong);
+  }
+
+  &:focus-visible {
+    @include focus-ring;
+  }
+}
+
+.tripCardActive {
+  box-shadow: inset 5px 0 0 var(--bus), var(--shadow-1);
+}
+
+.time {
+  @include mono;
+  font-weight: 700;
+  font-size: 22px;
+  letter-spacing: -0.02em;
+}
+
+.route {
+  font-weight: 800;
+  overflow-wrap: anywhere;
+}
+
+.crew {
+  font-size: var(--fs-sm);
+  color: var(--ink-3);
+  display: flex;
+  gap: var(--s3);
+  flex-wrap: wrap;
+  align-items: center;
+
+  i {
+    margin-right: 4px;
+  }
+}
+
+// ── Aktif sefer şeridi ───────────────────────────────────
+.strip {
+  background: var(--night);
+  color: var(--ink-inverse);
+  border-radius: var(--r-lg);
+  padding: var(--s4) var(--s4) var(--s4) calc(var(--s4) + 6px);
+  display: flex;
+  flex-direction: column;
+  gap: var(--s3);
+  position: relative;
+  overflow: hidden;
+
+  &::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 6px;
+    background: var(--bus);
+  }
+}
+
+.stripKicker {
+  font-size: var(--fs-xs);
+  color: var(--night-ink-2);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.stripTitle {
+  font-size: 22px;
+  font-weight: 800;
+  overflow-wrap: anywhere;
+}
+
+.stripSub {
+  font-size: var(--fs-sm);
+  color: var(--night-ink);
+  display: flex;
+  gap: 6px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.stats {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: var(--s2);
+
+  div {
+    background: color-mix(in srgb, var(--ink-inverse) 8%, transparent);
+    border-radius: var(--r-md);
+    padding: var(--s2) 4px;
+    text-align: center;
+    min-width: 0;
+  }
+
+  b {
+    display: block;
+    font-size: 20px;
+    @include mono;
+  }
+
+  span {
+    font-size: 11px;
+    color: var(--night-ink);
+  }
+}
+
+.stripAction {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--s2);
+  min-height: 52px;
+  border-radius: var(--r-md);
+  background: var(--bus);
+  color: var(--night);
+  font-weight: 800;
+  text-decoration: none;
+
+  &:focus-visible {
+    @include focus-ring;
+  }
+}
+
+// ── Durak başlığı + yolcu satırı ─────────────────────────
+.stopGroup {
+  display: flex;
+  flex-direction: column;
+}
+
+.stopHead {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 4px;
+  position: sticky;
+  top: var(--topbar-h);
+  background: var(--paper);
+  z-index: 5;
+  min-width: 0;
+
+  @include mobile {
+    top: var(--mobile-top-h);
+  }
+
+  b {
+    min-width: 0;
+    overflow-wrap: anywhere;
+  }
+}
+
+.stopHeadPlain {
+  background: var(--surface);
+}
+
+.seq {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: var(--ink);
+  color: var(--ink-inverse);
+  font-weight: 800;
+  font-size: var(--fs-sm);
+  display: grid;
+  place-items: center;
+  flex: none;
+}
+
+.seqNext {
+  background: var(--bus);
+  color: var(--night);
+}
+
+.stopTime {
+  @include mono;
+  font-size: var(--fs-sm);
+  color: var(--ink-3);
+  margin-left: auto;
+}
+
+.pax {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--r-lg);
+  padding: var(--s3);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: var(--s2);
+  min-width: 0;
+}
+
+.st-NONE {
+  border-left: 5px dashed var(--line-strong);
+}
+
+.st-BOARDED {
+  border-left: 5px solid var(--ok);
+}
+
+.st-DROPPED_OFF {
+  border-left: 5px solid var(--info);
+}
+
+.st-ABSENT {
+  border-left: 5px solid var(--danger);
+}
+
+.hasNotice {
+  background: linear-gradient(90deg, var(--notice-bg), var(--surface) 55%);
+}
+
+.who {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+
+  b {
+    font-size: 16px;
+    overflow-wrap: anywhere;
+  }
+}
+
+.acts {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
+  gap: var(--s2);
+
+  :global(.p-button) {
+    min-height: var(--tap);
+    justify-content: center;
+  }
+}
+
+.paxNote {
+  font-size: var(--fs-sm);
+  border-radius: var(--r-sm);
+  padding: var(--s2) 10px;
+  background: var(--surface);
+  border: 1px solid var(--notice-line);
+  overflow-wrap: anywhere;
+
+  b {
+    color: var(--notice);
+  }
+}
+
+.compact {
+  @include desktop {
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+
+    .who {
+      flex: 1 1 280px;
+    }
+
+    .paxNote {
+      flex: 1 1 100%;
+      order: 3;
+    }
+
+    .acts {
+      grid-template-columns: repeat(auto-fit, minmax(120px, 160px));
+
+      :global(.p-button) {
+        min-height: 40px;
+      }
+    }
+  }
+}
+
+// ── Yapışkan alt aksiyon çubuğu ──────────────────────────
+.actionBar {
+  position: sticky;
+  bottom: 0;
+  z-index: 15;
+  display: flex;
+  gap: var(--s2);
+  background: color-mix(in srgb, var(--paper) 94%, transparent);
+  backdrop-filter: blur(6px);
+  padding: 10px 0;
+
+  @include mobile {
+    bottom: calc(var(--bottom-nav-h) + 8px);
+  }
+
+  :global(.p-button) {
+    min-height: 52px;
+    justify-content: center;
+  }
+}
+
+.barMain {
+  flex: 2 1 0;
+}
+
+.barSide {
+  flex: 1 1 0;
+  min-width: 52px;
+}
+
+.barLabel {
+  @include mobile {
+    display: none;
+  }
+}
+
+// ── Durak zaman çizelgesi ────────────────────────────────
+.stops {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.stopItem {
+  display: grid;
+  grid-template-columns: 52px 22px minmax(0, 1fr) auto;
+  gap: 10px;
+  align-items: start;
+  padding: var(--s2) 0;
+  position: relative;
+
+  &::after {
+    content: "";
+    position: absolute;
+    left: 72px;
+    top: 26px;
+    bottom: -6px;
+    width: 2px;
+    background: var(--line);
+  }
+
+  &:last-child::after {
+    display: none;
+  }
+}
+
+.stopClock {
+  @include mono;
+  font-size: var(--fs-sm);
+  color: var(--ink-2);
+  padding-top: 2px;
+  text-align: right;
+}
+
+.pin {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  border: 3px solid var(--line-strong);
+  background: var(--surface);
+  margin: 3px auto 0;
+  position: relative;
+  z-index: 1;
+}
+
+.stopDone .pin {
+  border-color: var(--brand);
+  background: var(--brand);
+}
+
+.stopDone::after {
+  background: var(--brand);
+}
+
+.stopCurrent .pin {
+  border-color: var(--bus);
+  background: var(--bus);
+  box-shadow: 0 0 0 4px var(--bus-soft);
+}
+
+.stopName {
+  font-weight: 600;
+  overflow-wrap: anywhere;
+}
+
+// ── Liste / tablo ────────────────────────────────────────
+.filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--s3);
+  align-items: flex-end;
+  padding: var(--s4);
+  border-bottom: 1px solid var(--line);
+  background: var(--surface-2);
+
+  > * {
+    min-width: 160px;
+  }
+
+  @include mobile {
+    > * {
+      flex: 1 1 140px;
+      min-width: 0;
+    }
+  }
+}
+
+.filterAction {
+  margin-left: auto;
+  min-width: 0 !important;
+
+  @include mobile {
+    flex: 1 1 100% !important;
+    margin-left: 0;
+
+    :global(.p-button) {
+      width: 100%;
+    }
+  }
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+
+  th {
+    text-align: left;
+    font-size: var(--fs-xs);
+    font-weight: 700;
+    color: var(--ink-3);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    padding: 10px var(--s4);
+    background: var(--surface-2);
+    border-bottom: 1px solid var(--line);
+  }
+
+  td {
+    padding: var(--s3) var(--s4);
+    border-bottom: 1px solid var(--line);
+    vertical-align: middle;
+  }
+
+  tbody tr {
+    cursor: pointer;
+
+    &:hover {
+      background: var(--surface-2);
+    }
+  }
+}
+
+.cardList {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s3);
+  padding: var(--s3);
+}
+
+.pager {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--s2);
+  padding: var(--s3) var(--s4);
+  flex-wrap: wrap;
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+}
+
+.li {
+  display: flex;
+  gap: var(--s3);
+  align-items: flex-start;
+  padding: 14px var(--s4);
+  border-bottom: 1px solid var(--line);
+  min-width: 0;
+
+  &:last-child {
+    border-bottom: 0;
+  }
+}
+
+.liIcon {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: var(--surface-sunken);
+  color: var(--ink-2);
+  flex: none;
+}
+
+.summaryGrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--s2);
+}
+
+.summaryCell {
+  border: 1px solid var(--line);
+  border-radius: var(--r-md);
+  padding: 10px var(--s3);
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  align-items: flex-start;
+
+  b {
+    font-size: 24px;
+    font-weight: 800;
+    @include mono;
+  }
+}
+
+.headTitle {
+  font-size: 22px;
+  font-weight: 800;
+  margin: 0;
+  overflow-wrap: anywhere;
+}
+
+.cancelBtn {
+  border: 1.5px solid var(--danger) !important;
+}
+
+.shareRow {
+  display: flex;
+  gap: var(--s2);
+  flex-wrap: wrap;
+
+  :global(.p-button) {
+    flex: 1 1 180px;
+    min-height: 52px;
+    justify-content: center;
+  }
+}
+
+.formFull {
+  grid-column: 1 / -1;
+}
+
+.dlCompact {
+  margin: 0;
+}
+
+.tableWrap {
+  width: 100%;
+  overflow-x: auto;
+}

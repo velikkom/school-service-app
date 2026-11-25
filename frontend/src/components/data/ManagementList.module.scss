@@ -1,0 +1,217 @@
+@use "tokens" as *;
+
+.card {
+  @include card;
+  min-width: 0;
+  overflow: hidden;
+}
+
+.head {
+  padding: var(--s4) var(--s5) 0;
+}
+
+.title {
+  font-size: var(--fs-lg);
+  font-weight: 800;
+  margin: 0;
+}
+
+.subtitle {
+  font-size: var(--fs-sm);
+  color: var(--ink-3);
+  margin-top: 2px;
+}
+
+.toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  gap: var(--s3);
+  padding: var(--s4) var(--s5);
+  background: var(--surface-2);
+  border-bottom: 1px solid var(--line);
+
+  @include mobile {
+    padding: var(--s3) var(--s4);
+  }
+}
+
+.filters {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  gap: var(--s3);
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--s2);
+  margin-left: auto;
+
+  @include mobile {
+    width: 100%;
+
+    > :global(.p-button) {
+      flex: 1 1 auto;
+      justify-content: center;
+    }
+  }
+}
+
+.filter {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 150px;
+  flex: 0 1 200px;
+
+  @include mobile {
+    flex: 1 1 140px;
+    min-width: 0;
+  }
+}
+
+.filterGrow {
+  flex: 1 1 240px;
+}
+
+.filterLabel {
+  font-size: var(--fs-xs);
+  font-weight: 700;
+  color: var(--ink-2);
+}
+
+.select {
+  width: 100%;
+  min-width: 0;
+}
+
+.search {
+  position: relative;
+  display: block;
+
+  > i {
+    position: absolute;
+    left: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--ink-3);
+    pointer-events: none;
+  }
+
+  > :global(.p-inputtext) {
+    width: 100%;
+    padding-left: 36px;
+  }
+}
+
+.body {
+  min-width: 0;
+}
+
+.table {
+  :global(.p-datatable-wrapper) {
+    overflow-x: auto;
+  }
+}
+
+.right {
+  text-align: right !important;
+}
+
+.actionsHead {
+  text-align: right !important;
+}
+
+.actionsCell {
+  text-align: right;
+  white-space: nowrap;
+}
+
+.rowActions {
+  display: inline-flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: var(--s1);
+}
+
+.foot {
+  padding: var(--s3) var(--s5);
+  border-top: 1px solid var(--line);
+  font-size: var(--fs-xs);
+  color: var(--ink-3);
+}
+
+// Ana sütun hücresi: kalın ad + altında ikincil satır.
+.cellMain {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+
+  > b,
+  > a {
+    font-weight: 700;
+    color: var(--ink);
+    overflow-wrap: anywhere;
+  }
+
+  > a:hover {
+    color: var(--brand);
+  }
+
+  > span {
+    font-size: var(--fs-sm);
+    color: var(--ink-3);
+    overflow-wrap: anywhere;
+  }
+}
+
+@include mobile {
+  .table {
+    :global(.p-datatable-tbody > tr > td) {
+      overflow-wrap: anywhere;
+      min-width: 0;
+    }
+
+    // Kart başlığı: ana sütun etiketsiz, tam genişlik, sola yaslı.
+    :global(.p-datatable-tbody > tr > td).main {
+      display: block;
+      text-align: left;
+      padding-top: 8px;
+
+      :global(.p-column-title) {
+        display: none;
+      }
+    }
+
+    :global(.p-datatable-tbody > tr > td).actionsCell {
+      white-space: normal;
+
+      :global(.p-column-title) {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        overflow: hidden;
+        clip: rect(0 0 0 0);
+      }
+    }
+  }
+
+  .rowActions {
+    width: 100%;
+    justify-content: flex-start;
+
+    > :global(.p-button),
+    > a {
+      min-height: 40px;
+    }
+  }
+
+  .foot {
+    padding: var(--s3) var(--s4);
+  }
+}

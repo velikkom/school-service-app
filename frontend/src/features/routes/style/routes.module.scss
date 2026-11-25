@@ -1,0 +1,42 @@
+@use "tokens" as *;
+
+.head {
+  @include card;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--s3);
+  padding: var(--s4) var(--s5);
+
+  @include mobile {
+    padding: var(--s4);
+  }
+}
+
+.headText {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s2);
+  min-width: 0;
+}
+
+.headTitle {
+  font-size: var(--fs-xl);
+  font-weight: 800;
+  margin: 0;
+  overflow-wrap: anywhere;
+}
+
+.seq {
+  @include mono;
+  display: inline-grid;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: var(--ink);
+  color: var(--ink-inverse);
+  font-weight: 800;
+  font-size: var(--fs-xs);
+}

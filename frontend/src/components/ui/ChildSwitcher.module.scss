@@ -1,0 +1,73 @@
+@use "tokens" as *;
+
+.childSwitch {
+  display: flex;
+  gap: var(--s2);
+  overflow-x: auto;
+  padding-bottom: 2px;
+  max-width: 100%;
+  scrollbar-width: thin;
+}
+
+.childPill {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s2);
+  flex: 0 0 auto;
+  min-height: var(--tap);
+  padding: 6px 14px 6px 6px;
+  border-radius: var(--r-pill);
+  border: 1px solid var(--line);
+  background: var(--surface);
+  color: var(--ink);
+  font: inherit;
+  font-weight: 700;
+  white-space: nowrap;
+  text-decoration: none;
+  cursor: pointer;
+
+  &:focus-visible {
+    @include focus-ring;
+  }
+}
+
+.childOn {
+  border-color: var(--brand);
+  background: var(--brand-soft);
+  cursor: default;
+}
+
+.childAvatar {
+  display: inline-grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: var(--surface-sunken);
+  color: var(--ink-2);
+  font-size: var(--fs-xs);
+  font-weight: 800;
+}
+
+.childOn .childAvatar {
+  background: var(--brand);
+  color: var(--ink-inverse);
+}
+
+.childName {
+  max-width: 180px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.childGrade {
+  font-size: var(--fs-xs);
+  font-weight: 600;
+  color: var(--ink-3);
+}
+
+.childAdd {
+  border-style: dashed;
+  color: var(--ink-3);
+  padding-left: 14px;
+}

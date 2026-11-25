@@ -1,0 +1,5 @@
+// Ortak stil girişi. Sıra: token'lar → temel → PrimeReact uyarlaması.
+// Bileşen stilleri ilgili bileşenin *.module.scss dosyasındadır.
+@use "tokens/variables";
+@use "base/base";
+@use "base/primereact";

@@ -1,0 +1,55 @@
+// ServisFlow tasarım token'ları (SCSS tarafı). Değerlerin tek kaynağı CSS değişkenleridir
+// (styles/tokens/_variables.scss); bu dosya modüllerin "@use 'tokens' as *;" ile aldığı
+// kırılım ve yardımcı mixin'leri sağlar.
+
+$bp-mobile-max: 899.98px;
+$bp-desktop: 900px;
+$bp-wide: 1180px;
+$bp-narrow-max: 379.98px;
+
+@mixin mobile {
+  @media (max-width: $bp-mobile-max) {
+    @content;
+  }
+}
+
+@mixin desktop {
+  @media (min-width: $bp-desktop) {
+    @content;
+  }
+}
+
+@mixin below-wide {
+  @media (max-width: ($bp-wide - 0.02px)) {
+    @content;
+  }
+}
+
+@mixin narrow {
+  @media (max-width: $bp-narrow-max) {
+    @content;
+  }
+}
+
+@mixin focus-ring {
+  outline: none;
+  box-shadow: var(--focus);
+}
+
+@mixin card {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--r-lg);
+  box-shadow: var(--shadow-1);
+}
+
+@mixin mono {
+  font-family: var(--mono);
+  font-variant-numeric: tabular-nums;
+}
+
+@mixin reduced-motion {
+  @media (prefers-reduced-motion: reduce) {
+    @content;
+  }
+}

@@ -1,0 +1,79 @@
+// DESIGN_SYSTEM.md §2–4 token'ları. Kontrast düzeltmesi (tasarım incelemesi #3):
+// --ink-3 #6b7581 → #5b6571. Kâğıt (#f5f4ef) üzerinde 5,4:1, gömük zemin (#eeede6) üzerinde 5,0:1,
+// beyaz üzerinde 5,9:1 — normal metin için 4,5:1 eşiğini tüm zeminlerde geçer.
+:root {
+  --paper: #f5f4ef;
+  --surface: #ffffff;
+  --surface-2: #faf9f6;
+  --surface-sunken: #eeede6;
+  --line: #e2e0d7;
+  --line-strong: #cfccc0;
+
+  --ink: #18212b;
+  --ink-2: #47525e;
+  --ink-3: #5b6571;
+  --ink-inverse: #ffffff;
+
+  --brand: #0d6e5b;
+  --brand-strong: #0a5748;
+  --brand-soft: #e3f1ec;
+  --bus: #f0b20a;
+  --bus-soft: #fff6d9;
+  --night: #15202b;
+  --night-ink: #d7dde3;
+  --night-ink-2: #a3afba;
+
+  --ok: #17794a;
+  --ok-bg: #e4f4ea;
+  --ok-line: #b7e0c6;
+  --info: #2459c7;
+  --info-bg: #e7eefc;
+  --info-line: #c4d4f6;
+  --warn: #8a5100;
+  --warn-bg: #fff2d6;
+  --warn-line: #f2d491;
+  --danger: #b5302a;
+  --danger-bg: #fbe8e6;
+  --danger-line: #f0c1bd;
+  --notice: #5c46b0;
+  --notice-bg: #efebfb;
+  --notice-line: #d3c9f3;
+  --muted: #545e69;
+  --muted-bg: #eceae4;
+  --muted-line: #d8d5cb;
+
+  --font: var(--font-figtree), "Segoe UI", system-ui, -apple-system, sans-serif;
+  --mono: var(--font-plex-mono), ui-monospace, "Cascadia Mono", Consolas, monospace;
+  --fs-xs: 12px;
+  --fs-sm: 13px;
+  --fs-md: 15px;
+  --fs-lg: 17px;
+  --fs-xl: 21px;
+  --fs-2xl: 27px;
+
+  --s1: 4px;
+  --s2: 8px;
+  --s3: 12px;
+  --s4: 16px;
+  --s5: 20px;
+  --s6: 24px;
+  --s8: 32px;
+  --s10: 40px;
+
+  --r-sm: 6px;
+  --r-md: 10px;
+  --r-lg: 14px;
+  --r-xl: 20px;
+  --r-pill: 999px;
+
+  --shadow-1: 0 1px 2px rgba(24, 33, 43, 0.06), 0 1px 1px rgba(24, 33, 43, 0.04);
+  --shadow-2: 0 6px 20px rgba(24, 33, 43, 0.1), 0 2px 6px rgba(24, 33, 43, 0.06);
+  --shadow-3: 0 18px 50px rgba(24, 33, 43, 0.22);
+  --focus: 0 0 0 3px rgba(13, 110, 91, 0.35);
+  --tap: 48px;
+
+  --sidebar-w: 264px;
+  --topbar-h: 69px;
+  --mobile-top-h: 61px;
+  --bottom-nav-h: 68px;
+}

@@ -1,0 +1,32 @@
+name: school-service-platform
+
+services:
+  postgres:
+    image: postgres:16.4
+    container_name: ssp-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB:-school_service}
+      POSTGRES_USER: ${POSTGRES_USER:-school_service_app}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-change-me-strong-password}
+    ports:
+      - "${POSTGRES_PORT:-5432}:5432"
+    volumes:
+      - ssp_postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-school_service_app} -d ${POSTGRES_DB:-school_service}"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  mailpit:
+    image: axllent/mailpit:v1.21.3
+    container_name: ssp-mailpit
+    restart: unless-stopped
+    ports:
+      - "${MAILPIT_SMTP_PORT:-1025}:1025"
+      - "${MAILPIT_UI_PORT:-8025}:8025"
+
+volumes:
+  ssp_postgres_data:
+    name: ssp_postgres_data

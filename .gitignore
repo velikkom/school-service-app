@@ -1,0 +1,49 @@
+# --- OS / IDE ---
+.idea/
+.vscode/
+*.iml
+.DS_Store
+Thumbs.db
+
+# --- Backend (Maven / Java) ---
+backend/target/
+backend/**/target/
+*.class
+*.log
+!backend/.mvn/wrapper/maven-wrapper.jar
+
+# --- Frontend (Node / Next.js) ---
+frontend/node_modules/
+frontend/.next/
+frontend/out/
+frontend/build/
+frontend/coverage/
+frontend/.env
+frontend/.env.local
+frontend/.env.*.local
+frontend/npm-debug.log*
+
+# --- Env files with real secrets ---
+.env
+.env.local
+*.env.local
+!.env.example
+!compose.dev.env.example
+
+# --- Test / build artifacts ---
+**/test-results/
+**/playwright-report/
+**/.playwright/
+backend/**/*.hprof
+
+# --- Docker volumes/data (if bind-mounted locally) ---
+.docker-data/
+
+# --- Misc ---
+*.tmp
+*.bak
+
+# --- Sprint 3 izole E2E calisma klasoru (loglar, rapor; sir icermez) ---
+.e2e/
+frontend/.next-e2e/
+frontend/.next-build/

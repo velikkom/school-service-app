@@ -1,0 +1,21 @@
+@use "tokens" as *;
+
+.head {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+
+  > div {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    align-items: flex-start;
+    min-width: 0;
+    overflow-wrap: anywhere;
+  }
+}
+
+.name {
+  font-size: var(--fs-xl);
+  font-weight: 800;
+}

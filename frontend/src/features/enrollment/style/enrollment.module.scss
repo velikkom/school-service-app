@@ -1,0 +1,236 @@
+@use "tokens" as *;
+
+.page {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s4);
+  max-width: 760px;
+  min-width: 0;
+}
+
+.stack {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s3);
+  min-width: 0;
+}
+
+// ── Adım göstergesi ──────────────────────────────────────
+.steps {
+  display: flex;
+  gap: var(--s2);
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+}
+
+.step {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 12.5px;
+  font-weight: 600;
+  color: var(--ink-3);
+
+  &::before {
+    content: "";
+    height: 4px;
+    border-radius: 4px;
+    background: var(--line);
+  }
+
+  > span:first-child {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+}
+
+.done::before,
+.on::before {
+  background: var(--brand);
+}
+
+.on {
+  color: var(--ink);
+}
+
+// ── Sihirbaz ─────────────────────────────────────────────
+.wizard {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.wizardBody {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s4);
+  padding: var(--s5);
+
+  @include mobile {
+    padding: var(--s4);
+  }
+}
+
+.stepTitle {
+  margin: 0;
+  font-size: var(--fs-xl);
+  font-weight: 800;
+}
+
+.wizardFoot {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--s2);
+  padding: var(--s4) var(--s5);
+  border-top: 1px solid var(--line);
+  background: var(--surface-2);
+
+  :global(.p-button) {
+    min-height: var(--tap);
+  }
+
+  @include mobile {
+    padding: var(--s3) var(--s4);
+
+    :global(.p-button) {
+      flex: 1;
+      justify-content: center;
+    }
+  }
+}
+
+.contractBox {
+  border: 1px solid var(--line);
+  border-radius: var(--r-md);
+  background: var(--surface-2);
+  padding: var(--s4);
+  font-size: var(--fs-sm);
+
+  p {
+    margin: var(--s2) 0 0;
+    color: var(--ink-2);
+  }
+}
+
+.checkRow {
+  display: flex;
+  align-items: center;
+  gap: var(--s3);
+  min-height: var(--tap);
+  font-weight: 600;
+
+  label {
+    cursor: pointer;
+  }
+}
+
+.error {
+  font-size: 12.5px;
+  color: var(--danger);
+  font-weight: 600;
+}
+
+// ── Kabuk dışı tam ekran (kapı) ─────────────────────────
+.fullscreen {
+  min-height: 100vh;
+  background: var(--paper);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--s4);
+  padding: var(--s6) var(--s4);
+
+  > * {
+    width: min(720px, 100%);
+  }
+}
+
+.brandRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--s2);
+}
+
+.brand {
+  font-weight: 800;
+  font-size: var(--fs-lg);
+  color: var(--brand-strong);
+}
+
+.gateCard {
+  @include card;
+  overflow: hidden;
+  min-width: 0;
+}
+
+.gateTitle {
+  margin: var(--s5) var(--s5) 0;
+  font-size: var(--fs-2xl);
+  font-weight: 800;
+
+  @include mobile {
+    margin: var(--s4) var(--s4) 0;
+    font-size: var(--fs-xl);
+  }
+}
+
+.gateCard > .pendingText {
+  margin: var(--s2) var(--s5) 0;
+
+  @include mobile {
+    margin: var(--s2) var(--s4) 0;
+  }
+}
+
+.pendingCard {
+  @include card;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: var(--s4);
+  padding: var(--s8) var(--s5);
+}
+
+.pendingIcon {
+  display: grid;
+  place-items: center;
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: var(--warn-bg);
+  color: var(--warn);
+
+  i {
+    font-size: 28px;
+  }
+}
+
+.pendingTitle {
+  margin: 0;
+  font-size: var(--fs-xl);
+  font-weight: 800;
+}
+
+.pendingText {
+  margin: 0;
+  color: var(--ink-2);
+  font-size: var(--fs-md);
+}
+
+.pendingActions {
+  display: flex;
+  gap: var(--s2);
+  flex-wrap: wrap;
+  justify-content: center;
+
+  :global(.p-button) {
+    min-height: var(--tap);
+  }
+}

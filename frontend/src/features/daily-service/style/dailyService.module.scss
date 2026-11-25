@@ -1,0 +1,152 @@
+@use "tokens" as *;
+
+.page {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s4);
+  max-width: 760px;
+  min-width: 0;
+}
+
+.sectionTitle {
+  margin: var(--s2) 0 0;
+  font-size: var(--fs-lg);
+  font-weight: 800;
+}
+
+.between {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--s2);
+  flex-wrap: wrap;
+}
+
+.row {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s2);
+  flex-wrap: wrap;
+}
+
+.badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.small {
+  font-size: var(--fs-sm);
+  color: var(--ink-2);
+  overflow-wrap: anywhere;
+}
+
+.meta {
+  font-size: var(--fs-xs);
+  color: var(--ink-3);
+  margin: 0;
+}
+
+.metaBlock {
+  display: block;
+  margin-top: 4px;
+  font-size: var(--fs-xs);
+}
+
+.minw0 {
+  min-width: 0;
+}
+
+// ── Hero servis kartı ────────────────────────────────────
+.hero {
+  border-radius: var(--r-xl);
+  overflow: hidden;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  box-shadow: var(--shadow-2);
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+
+  // LocationPanel kart içinde: köşesiz, üst çizgili
+  > div:not(.heroTop):not(.heroActions) {
+    border-radius: 0;
+    border-left: 0;
+    border-right: 0;
+  }
+}
+
+.heroTop {
+  padding: var(--s4) 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.when {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.timeLg {
+  @include mono;
+  font-size: 34px;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 1.1;
+}
+
+.timeSm {
+  @include mono;
+  font-weight: 700;
+}
+
+.stopline {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  padding: var(--s3) 14px;
+  background: var(--surface-2);
+  border-radius: var(--r-md);
+
+  > i {
+    font-size: 22px;
+    color: var(--brand);
+  }
+}
+
+.heroActions {
+  padding: var(--s4) 18px;
+  border-top: 1px solid var(--line);
+}
+
+.actions {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s2);
+}
+
+.tapBtn {
+  min-height: var(--tap) !important;
+  width: 100%;
+  justify-content: center;
+}
+
+// ── İkincil kart ─────────────────────────────────────────
+.card {
+  @include card;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: var(--s4);
+  min-width: 0;
+}
+
+.studentHead {
+  display: flex;
+  align-items: center;
+  gap: var(--s3);
+  min-width: 0;
+}

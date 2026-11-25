@@ -1,0 +1,124 @@
+@use "tokens" as *;
+
+.card {
+  @include card;
+}
+
+.state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 10px;
+  padding: 48px 24px;
+}
+
+.compact {
+  padding: 24px 16px;
+}
+
+.ill {
+  width: 64px;
+  height: 64px;
+  border-radius: 18px;
+  display: grid;
+  place-items: center;
+  background: var(--surface-sunken);
+  color: var(--ink-3);
+
+  i {
+    font-size: 28px;
+  }
+}
+
+.error .ill {
+  background: var(--danger-bg);
+  color: var(--danger);
+}
+
+.forbid .ill {
+  background: var(--warn-bg);
+  color: var(--warn);
+}
+
+.title {
+  font-size: 18px;
+}
+
+.message {
+  color: var(--ink-3);
+  max-width: 440px;
+}
+
+.code {
+  font-size: var(--fs-xs);
+  color: var(--ink-3);
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 4px;
+
+  &:empty {
+    display: none;
+  }
+}
+
+.loading {
+  padding: 18px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+%sk {
+  background: linear-gradient(90deg, #ecebe4 25%, #f6f5f0 50%, #ecebe4 75%);
+  background-size: 200% 100%;
+  animation: sk 1.3s infinite;
+  border-radius: 8px;
+
+  @include reduced-motion {
+    animation: none;
+  }
+}
+
+.skTitle {
+  @extend %sk;
+  height: 22px;
+  width: 40%;
+}
+
+.skRow {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+.skIcon {
+  @extend %sk;
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  flex: none;
+}
+
+.skLines {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.skLine {
+  @extend %sk;
+  height: 13px;
+}
+
+@keyframes sk {
+  to {
+    background-position: -200% 0;
+  }
+}

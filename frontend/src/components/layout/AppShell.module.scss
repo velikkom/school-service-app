@@ -1,0 +1,466 @@
+@use "tokens" as *;
+
+.app {
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: var(--sidebar-w) minmax(0, 1fr);
+  background: var(--paper);
+
+  @include mobile {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+.skip {
+  position: absolute;
+  left: -9999px;
+  top: 8px;
+  z-index: 100;
+  background: var(--surface);
+  padding: 8px 12px;
+  border-radius: 8px;
+
+  &:focus {
+    left: 8px;
+  }
+}
+
+// ── Kenar menü ────────────────────────────────────────────
+.sidebar {
+  background: var(--night);
+  color: var(--night-ink);
+  display: flex;
+  flex-direction: column;
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  overflow-y: auto;
+
+  @include mobile {
+    display: none;
+  }
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 18px 20px 14px;
+  color: #fff;
+  text-decoration: none;
+
+  > span:last-child {
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+.brandMark {
+  border-radius: 10px;
+  background: var(--bus);
+  color: var(--night);
+  display: grid;
+  place-items: center;
+  flex: none;
+  font-size: 17px;
+}
+
+.brandName {
+  font-weight: 800;
+  font-size: 18px;
+  letter-spacing: -0.02em;
+}
+
+.brandSub {
+  font-size: 11px;
+  color: var(--night-ink-2);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.nav {
+  padding-bottom: 12px;
+}
+
+.navGroup {
+  padding: 6px 12px;
+}
+
+.navGroupTitle {
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--night-ink-2);
+  padding: 10px 10px 6px;
+}
+
+.navLink {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 10px;
+  min-height: 38px;
+  border-radius: 8px;
+  color: var(--night-ink);
+  text-decoration: none;
+  font-size: 14px;
+  position: relative;
+
+  i {
+    font-size: 15px;
+    width: 18px;
+    text-align: center;
+  }
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.06);
+    color: #fff;
+  }
+
+  &:focus-visible {
+    box-shadow: 0 0 0 3px rgba(240, 178, 10, 0.55);
+  }
+}
+
+.navLinkActive {
+  background: rgba(240, 178, 10, 0.14);
+  color: #fff;
+  font-weight: 700;
+
+  &::before {
+    content: "";
+    position: absolute;
+    left: -12px;
+    top: 8px;
+    bottom: 8px;
+    width: 3px;
+    border-radius: 3px;
+    background: var(--bus);
+  }
+}
+
+.count {
+  margin-left: auto;
+  font-size: 11px;
+  font-weight: 800;
+  background: var(--bus);
+  color: var(--night);
+  border-radius: var(--r-pill);
+  padding: 1px 7px;
+}
+
+.sidebarFoot {
+  margin-top: auto;
+  padding: 14px 20px;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.logout {
+  background: none;
+  border: 0;
+  color: var(--night-ink);
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  cursor: pointer;
+  padding: 8px 0;
+  font-size: 14px;
+
+  &:hover {
+    color: #fff;
+  }
+}
+
+// ── Ana alan ──────────────────────────────────────────────
+.main {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.topbar {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 28px;
+  min-height: var(--topbar-h);
+  background: var(--surface);
+  border-bottom: 1px solid var(--line);
+  position: sticky;
+  top: 0;
+  z-index: 20;
+
+  @include mobile {
+    display: none;
+  }
+}
+
+.topTitles {
+  min-width: 0;
+}
+
+.crumbs {
+  font-size: 13px;
+  color: var(--ink-3);
+}
+
+.pageTitle {
+  font-size: var(--fs-xl);
+  font-weight: 800;
+}
+
+.topRight {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.todayChip {
+  display: inline-flex;
+  gap: 6px;
+  align-items: center;
+  font-size: 13px;
+  color: var(--ink-2);
+  background: var(--surface-2);
+  border: 1px solid var(--line);
+  border-radius: var(--r-pill);
+  padding: 5px 12px;
+  white-space: nowrap;
+
+  @include below-wide {
+    display: none;
+  }
+}
+
+.iconBtn {
+  width: 44px;
+  height: 44px;
+  border-radius: 10px;
+  border: 1px solid var(--line);
+  background: var(--surface);
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  position: relative;
+  color: var(--ink-2);
+  text-decoration: none;
+  flex: none;
+
+  &:hover {
+    background: var(--surface-2);
+  }
+}
+
+.dot {
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  min-width: 18px;
+  height: 18px;
+  border-radius: 9px;
+  background: var(--danger);
+  color: #fff;
+  font-size: 10px;
+  font-weight: 800;
+  display: grid;
+  place-items: center;
+  padding: 0 4px;
+}
+
+.userChip {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  text-decoration: none;
+  color: inherit;
+  border-radius: 10px;
+  padding: 2px 6px 2px 2px;
+}
+
+.who {
+  line-height: 1.15;
+
+  b {
+    display: block;
+    font-size: 14px;
+  }
+
+  span {
+    font-size: 12px;
+    color: var(--ink-3);
+  }
+}
+
+.mTop {
+  display: none;
+
+  @include mobile {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    position: sticky;
+    top: 0;
+    z-index: 20;
+    padding: 8px 16px;
+    min-height: var(--mobile-top-h);
+    background: var(--surface);
+    border-bottom: 1px solid var(--line);
+  }
+}
+
+.mTitles {
+  flex: 1;
+  min-width: 0;
+}
+
+.mTitle {
+  font-size: var(--fs-lg);
+  font-weight: 800;
+  line-height: 1.15;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.mSub {
+  font-size: 12px;
+  color: var(--ink-3);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.content {
+  flex: 1;
+  padding: 24px 28px 48px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  min-width: 0;
+  outline: none;
+
+  @include mobile {
+    // Alt menü + güvenli alan + yapışkan aksiyon çubuğu için boşluk.
+    padding: 16px 16px calc(var(--bottom-nav-h) + 40px + env(safe-area-inset-bottom));
+    gap: 16px;
+  }
+}
+
+// ── Alt menü ──────────────────────────────────────────────
+.bottomNav {
+  display: none;
+
+  @include mobile {
+    display: grid;
+    grid-auto-flow: column;
+    grid-auto-columns: 1fr;
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 30;
+    background: var(--surface);
+    border-top: 1px solid var(--line);
+    padding: 6px 4px calc(6px + env(safe-area-inset-bottom));
+    min-height: var(--bottom-nav-h);
+  }
+
+  a,
+  button {
+    min-height: 54px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 3px;
+    font-size: 11.5px;
+    font-weight: 600;
+    color: var(--ink-3);
+    text-decoration: none;
+    border-radius: 12px;
+    position: relative;
+    background: none;
+    border: 0;
+    cursor: pointer;
+    padding: 0 2px;
+
+    i {
+      font-size: 19px;
+    }
+
+    span:last-child {
+      white-space: nowrap;
+    }
+  }
+}
+
+.bottomActive {
+  color: var(--brand-strong) !important;
+  background: var(--brand-soft) !important;
+}
+
+.countMobile {
+  position: absolute;
+  top: 4px;
+  right: calc(50% - 24px);
+  background: var(--danger);
+  color: #fff;
+  font-size: 10px;
+  font-weight: 800;
+  border-radius: 8px;
+  padding: 0 5px;
+}
+
+// ── "Daha fazla" alttan sayfa ─────────────────────────────
+.sheet {
+  height: auto !important;
+  max-height: 85vh;
+  border-radius: 20px 20px 0 0;
+
+  :global(.p-sidebar-content) {
+    padding: 0 16px 24px;
+  }
+}
+
+.sheetUser {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.sheetGroup {
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--ink-3);
+  margin: 14px 8px 6px;
+  font-weight: 700;
+}
+
+.sheetLink {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-height: var(--tap);
+  padding: 0 8px;
+  border-radius: 10px;
+  text-decoration: none;
+  color: var(--ink);
+  font-weight: 600;
+  width: 100%;
+  background: none;
+  border: 0;
+  cursor: pointer;
+  font-size: 15px;
+
+  .count {
+    margin-left: auto;
+  }
+}
+
+.sheetLinkActive {
+  background: var(--brand-soft);
+  color: var(--brand-strong);
+}

@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ServisFlow · Ekran prototipi</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/styles.css">
+</head>
+<body>
+  <!-- Prototip araç çubuğu: uygulamanın parçası değildir. -->
+  <div class="proto-bar" role="toolbar" aria-label="Prototip kontrolleri">
+    <span class="tag">PROTOTİP</span>
+    <a href="#/index">Ekran dizini</a>
+    <label>Rol
+      <select id="pb-role">
+        <option value="">—</option>
+        <option value="admin">Yönetici (Selin Aydın)</option>
+        <option value="driver">Şoför (Murat Kılıç)</option>
+        <option value="hostess">Hostes (Ayşe Yıldız)</option>
+        <option value="parent">Veli (Elif Korkmaz)</option>
+        <option value="student">Öğrenci (Deniz Korkmaz)</option>
+        <option value="public">Herkese açık</option>
+      </select>
+    </label>
+    <label>Genişlik
+      <select id="pb-vp">
+        <option value="1440">Masaüstü 1440</option>
+        <option value="390">Mobil 390</option>
+        <option value="360">Dar mobil 360</option>
+      </select>
+    </label>
+    <label>Ekran durumu
+      <select id="pb-state">
+        <option value="normal">Normal</option>
+        <option value="loading">Yükleniyor</option>
+        <option value="empty">Boş</option>
+        <option value="error">Hata</option>
+        <option value="forbidden">Yetki yok</option>
+      </select>
+    </label>
+    <label><input type="checkbox" id="pb-notes" checked> Tasarım notları</label>
+    <span class="spacer"></span>
+    <span>Örnek saat: 18.11.2026 07:34 · veriler sentetik</span>
+    <button type="button" data-act="reset-data">Örnek veriyi sıfırla</button>
+  </div>
+  <div class="stage" id="stage">
+    <div class="device">
+      <div id="app-root" style="height:100%"></div>
+      <div class="dialog-root" id="dialog-root"></div>
+      <div class="toast-root" id="toast-root" aria-live="polite"></div>
+    </div>
+  </div>
+  <script src="assets/icons.js"></script>
+  <script src="assets/data.js"></script>
+  <script src="assets/ui.js"></script>
+  <script src="assets/app.js"></script>
+  <script src="assets/screens-common.js"></script>
+  <script src="assets/screens-admin.js"></script>
+  <script src="assets/screens-field.js"></script>
+  <script src="assets/screens-family.js"></script>
+</body>
+</html>

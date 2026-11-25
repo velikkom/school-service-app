@@ -1,0 +1,44 @@
+# Test Agent sahipliği (backend/src/test). "test" Spring profili - sadece AbstractIntegrationTest
+# tabanlı entegrasyon testlerinde aktif edilir. Testcontainers @ServiceConnection, datasource
+# ayarlarını (url/username/password) otomatik sağladığı için burada spring.datasource.* YOKTUR.
+#
+# NOT: Bu dosyadaki property adları (app.jwt.*, app.cors.*, app.mail.*, app.bootstrap-admin.*)
+# backend/src/main altındaki @Value/@ConfigurationProperties ile uyumlu olacak şekilde seçildi
+# (bkz. JwtProperties, SecurityConfig, PasswordResetMailService, AdminBootstrapRunner). Backend
+# Agent bu property adlarını değiştirirse bu dosyanın da güncellenmesi gerekir.
+spring:
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    open-in-view: false
+  flyway:
+    enabled: true
+  mail:
+    host: localhost
+    port: 1
+    properties:
+      mail:
+        smtp:
+          connectiontimeout: 500
+          timeout: 500
+          writetimeout: 500
+
+app:
+  jwt:
+    # Test-only secret. ASLA production'da kullanılmaz. Base64, 32 byte.
+    secret: "IFgMDhPIIN9nSbRN8AOWwzCLm3xlfZ0oSgALphoS6us="
+    access-token-ttl-minutes: 15
+    refresh-token-ttl-days: 7
+    refresh-token-ttl-days-remember-me: 30
+  cors:
+    allowed-origins: "http://localhost:3000"
+  mail:
+    from: "no-reply@test.local"
+    reset-password-base-url: "http://localhost:3000/sifre-sifirla"
+    registration-verification-base-url: "http://localhost:3000/e-posta-dogrula"
+  bootstrap-admin:
+    email: "admin.bootstrap.test@ssp.local"
+    password: "Test-Only-Bootstrap-Pass-123!"
+    full-name: "Test Bootstrap Admin"
+  security:
+    internal-service-key: "test-only-internal-service-key-32bytes"

@@ -1,0 +1,167 @@
+@use "../tokens" as *;
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: var(--font);
+  font-size: var(--fs-md);
+  line-height: 1.45;
+  color: var(--ink);
+  background: var(--paper);
+  -webkit-font-smoothing: antialiased;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+  color: inherit;
+}
+
+a {
+  color: var(--brand);
+}
+
+h1,
+h2,
+h3,
+h4 {
+  margin: 0;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+  font-weight: 800;
+}
+
+p {
+  margin: 0;
+}
+
+:focus-visible {
+  outline: none;
+  box-shadow: var(--focus);
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+.mono {
+  @include mono;
+}
+
+.muted {
+  color: var(--ink-3);
+}
+
+.text-sm {
+  font-size: var(--fs-sm);
+}
+
+.text-xs {
+  font-size: var(--fs-xs);
+}
+
+// Genel yerleşim yardımcıları (CSS Grid / Flexbox). Bootstrap yok.
+.stack {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s2);
+}
+
+.stack-lg {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s4);
+}
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--s2);
+}
+
+.between {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--s3);
+  flex-wrap: wrap;
+}
+
+.grid-2,
+.grid-3,
+.grid-4,
+.grid-main {
+  display: grid;
+  gap: var(--s4);
+}
+
+.grid-2 {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.grid-3 {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.grid-4 {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.grid-main {
+  grid-template-columns: minmax(0, 1.65fr) minmax(320px, 1fr);
+  align-items: start;
+}
+
+@include below-wide {
+  .grid-4 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .grid-main {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+@include mobile {
+  .grid-2,
+  .grid-3 {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .hide-mobile {
+    display: none !important;
+  }
+}
+
+@include desktop {
+  .show-mobile {
+    display: none !important;
+  }
+}
+
+@include reduced-motion {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    transition-duration: 0.001ms !important;
+  }
+}

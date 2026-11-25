@@ -1,0 +1,315 @@
+@use "tokens" as *;
+
+// ── Rozet ─────────────────────────────────────────────────
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  min-height: 24px;
+  padding: 2px 9px;
+  border-radius: var(--r-pill);
+  font-size: 12px;
+  font-weight: 700;
+  border: 1px solid;
+  white-space: nowrap;
+  line-height: 1.2;
+
+  i {
+    font-size: 12px;
+  }
+}
+
+.b-ok,
+.b-live {
+  color: var(--ok);
+  background: var(--ok-bg);
+  border-color: var(--ok-line);
+}
+
+.b-info {
+  color: var(--info);
+  background: var(--info-bg);
+  border-color: var(--info-line);
+}
+
+.b-warn {
+  color: var(--warn);
+  background: var(--warn-bg);
+  border-color: var(--warn-line);
+}
+
+.b-danger {
+  color: var(--danger);
+  background: var(--danger-bg);
+  border-color: var(--danger-line);
+}
+
+.b-notice {
+  color: var(--notice);
+  background: var(--notice-bg);
+  border-color: var(--notice-line);
+}
+
+.b-muted {
+  color: var(--muted);
+  background: var(--muted-bg);
+  border-color: var(--muted-line);
+}
+
+.b-none {
+  color: var(--ink-2);
+  background: var(--surface);
+  border: 1.5px dashed var(--line-strong);
+}
+
+.pulse {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--ok);
+  box-shadow: 0 0 0 0 rgba(23, 121, 74, 0.5);
+  animation: pulse 1.8s infinite;
+
+  @include reduced-motion {
+    animation: none;
+  }
+}
+
+@keyframes pulse {
+  70% {
+    box-shadow: 0 0 0 7px rgba(23, 121, 74, 0);
+  }
+
+  100% {
+    box-shadow: 0 0 0 0 rgba(23, 121, 74, 0);
+  }
+}
+
+// ── Plaka ─────────────────────────────────────────────────
+.plate {
+  display: inline-flex;
+  align-items: stretch;
+  border: 1.5px solid var(--ink);
+  border-radius: 5px;
+  overflow: hidden;
+  font-family: var(--mono);
+  font-weight: 700;
+  font-size: 13px;
+  background: #fff;
+  color: var(--ink);
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.plateInverse {
+  border-color: #fff;
+}
+
+.plateTr {
+  background: #2459c7;
+  color: #fff;
+  font-size: 8px;
+  padding: 4px 3px 0;
+  letter-spacing: 0.02em;
+}
+
+.plateText {
+  padding: 4px 7px;
+}
+
+// ── Kart ──────────────────────────────────────────────────
+.card {
+  @include card;
+  min-width: 0;
+}
+
+.cardHead {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 20px;
+  border-bottom: 1px solid var(--line);
+  flex-wrap: wrap;
+}
+
+.cardHeadText {
+  min-width: 0;
+}
+
+.cardTitle {
+  font-size: var(--fs-lg);
+}
+
+.cardSub {
+  font-size: 13px;
+  color: var(--ink-3);
+}
+
+.cardActions {
+  margin-left: auto;
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.cardBody {
+  padding: 18px 20px;
+
+  @include mobile {
+    padding: 14px 16px;
+  }
+}
+
+.cardFoot {
+  padding: 12px 20px;
+  border-top: 1px solid var(--line);
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+// ── Metrik ────────────────────────────────────────────────
+.metric {
+  padding: 16px 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  text-decoration: none;
+  color: inherit;
+
+  &:is(a):hover {
+    border-color: var(--line-strong);
+  }
+}
+
+.metricAttention {
+  border-color: var(--warn-line);
+  box-shadow: inset 4px 0 0 var(--bus), var(--shadow-1);
+}
+
+.metricLabel {
+  font-size: 13px;
+  color: var(--ink-3);
+  display: flex;
+  gap: 6px;
+  align-items: center;
+}
+
+.metricValue {
+  font-size: 30px;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  font-variant-numeric: tabular-nums;
+}
+
+.metricHint {
+  font-size: 12.5px;
+  color: var(--ink-3);
+}
+
+// ── Tanım listesi ─────────────────────────────────────────
+.dl {
+  display: grid;
+  grid-template-columns: max-content 1fr;
+  gap: 8px 18px;
+  font-size: 14px;
+  margin: 0;
+
+  @include narrow {
+    grid-template-columns: 1fr;
+    gap: 2px 0;
+  }
+}
+
+.dlRow {
+  display: contents;
+
+  dt {
+    color: var(--ink-3);
+  }
+
+  dd {
+    margin: 0;
+    font-weight: 600;
+    min-width: 0;
+    overflow-wrap: anywhere;
+  }
+}
+
+// ── Uyarı kutusu ──────────────────────────────────────────
+.notice {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  padding: 12px 14px;
+  border-radius: var(--r-md);
+  border: 1px solid;
+  font-size: 14px;
+
+  > i {
+    margin-top: 2px;
+    flex: none;
+  }
+
+  b {
+    display: block;
+  }
+}
+
+.noticeBody {
+  flex: 1;
+  min-width: 0;
+}
+
+.noticeAction {
+  flex: none;
+}
+
+.n-info {
+  background: var(--info-bg);
+  border-color: var(--info-line);
+  color: #193f8f;
+}
+
+.n-warn {
+  background: var(--warn-bg);
+  border-color: var(--warn-line);
+  color: #5f3800;
+}
+
+.n-danger {
+  background: var(--danger-bg);
+  border-color: var(--danger-line);
+  color: #7f211c;
+}
+
+.n-ok {
+  background: var(--ok-bg);
+  border-color: var(--ok-line);
+  color: #10563a;
+}
+
+.n-notice {
+  background: var(--notice-bg);
+  border-color: var(--notice-line);
+  color: #3f2f86;
+}
+
+.n-muted {
+  background: var(--surface-2);
+  border-color: var(--line);
+  color: var(--ink-2);
+}
+
+// ── Avatar ────────────────────────────────────────────────
+.avatar {
+  border-radius: 50%;
+  background: var(--brand-soft);
+  color: var(--brand-strong);
+  font-weight: 800;
+  display: inline-grid;
+  place-items: center;
+  flex: none;
+}

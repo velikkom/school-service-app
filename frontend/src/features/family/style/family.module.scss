@@ -1,0 +1,293 @@
+@use "tokens" as *;
+
+
+// ── Ortak ───────────────────────────────────────────────
+.page {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s4);
+  max-width: 760px;
+  min-width: 0;
+}
+
+.pageWide {
+  max-width: none;
+}
+
+.tap {
+  min-height: var(--tap);
+}
+
+.sectionTitle {
+  margin: var(--s2) 0 0;
+  font-size: var(--fs-lg);
+  font-weight: 800;
+}
+
+.itemCard {
+  @include card;
+  display: flex;
+  flex-direction: column;
+  gap: var(--s2);
+  padding: var(--s4);
+  min-width: 0;
+}
+
+.itemHead {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--s2);
+  flex-wrap: wrap;
+}
+
+.itemTitle {
+  font-weight: 800;
+  overflow-wrap: anywhere;
+}
+
+.small {
+  font-size: var(--fs-sm);
+  color: var(--ink-2);
+  overflow-wrap: anywhere;
+}
+
+.meta {
+  font-size: var(--fs-xs);
+  color: var(--ink-3);
+}
+
+.badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.quote {
+  font-size: var(--fs-sm);
+  color: var(--ink-2);
+  font-style: italic;
+  overflow-wrap: anywhere;
+}
+
+// ── Sekmeler (?tab=) ─────────────────────────────────────
+.tabs {
+  display: flex;
+  gap: var(--s1);
+  border-bottom: 1px solid var(--line);
+  overflow-x: auto;
+}
+
+.tab {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: var(--tap);
+  padding: 0 var(--s3);
+  border-bottom: 3px solid transparent;
+  color: var(--ink-3);
+  font-weight: 700;
+  white-space: nowrap;
+  text-decoration: none;
+
+  &:focus-visible {
+    @include focus-ring;
+  }
+}
+
+.tabOn {
+  color: var(--ink);
+  border-bottom-color: var(--brand);
+}
+
+.count {
+  display: inline-grid;
+  place-items: center;
+  min-width: 22px;
+  height: 22px;
+  padding: 0 6px;
+  border-radius: var(--r-pill);
+  background: var(--surface-sunken);
+  color: var(--ink-2);
+  font-size: var(--fs-xs);
+}
+
+// ── Çocuklarım ───────────────────────────────────────────
+.childCardHead {
+  display: flex;
+  align-items: center;
+  gap: var(--s3);
+  min-width: 0;
+}
+
+.childCardText {
+  flex: 1;
+  min-width: 0;
+}
+
+.assignGrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--s2);
+
+  @include mobile {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+.assignBox {
+  border: 1px solid var(--line);
+  border-radius: var(--r-md);
+  padding: var(--s3);
+  background: var(--surface-2);
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+}
+
+.actionsRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--s2);
+
+  > * {
+    min-height: var(--tap);
+  }
+
+  @include mobile {
+    > * {
+      flex: 1 1 100%;
+      justify-content: center;
+    }
+  }
+}
+
+// ── Güzergâhım ───────────────────────────────────────────
+.stopline {
+  display: flex;
+  gap: var(--s3);
+  align-items: center;
+  padding: var(--s3) var(--s4);
+  background: var(--surface-2);
+  border-radius: var(--r-md);
+  min-width: 0;
+
+  > i {
+    font-size: 20px;
+    color: var(--brand);
+  }
+}
+
+.bigTime {
+  @include mono;
+  font-size: var(--fs-xl);
+  font-weight: 700;
+}
+
+// ── Finans ───────────────────────────────────────────────
+.summaryGrid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: var(--s3);
+
+  @include below-wide {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  @include narrow {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+.summaryItem {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+
+  span {
+    font-size: var(--fs-xs);
+    color: var(--ink-3);
+    font-weight: 700;
+  }
+
+  b {
+    @include mono;
+    font-size: var(--fs-lg);
+    overflow-wrap: anywhere;
+  }
+}
+
+.balanceDue b {
+  color: var(--danger);
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: var(--fs-sm);
+
+  th,
+  td {
+    padding: 10px var(--s3);
+    border-bottom: 1px solid var(--line);
+    text-align: left;
+    vertical-align: middle;
+  }
+
+  th {
+    font-size: var(--fs-xs);
+    color: var(--ink-3);
+    font-weight: 700;
+    background: var(--surface-2);
+  }
+
+  tr:last-child td {
+    border-bottom: 0;
+  }
+}
+
+.num {
+  @include mono;
+  text-align: right !important;
+  white-space: nowrap;
+}
+
+.rowList {
+  display: flex;
+  flex-direction: column;
+}
+
+.rowItem {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: var(--s3) var(--s4);
+  border-bottom: 1px solid var(--line);
+  min-width: 0;
+
+  &:last-child {
+    border-bottom: 0;
+  }
+}
+
+.rowLine {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--s2);
+  flex-wrap: wrap;
+  min-width: 0;
+}
+
+.money {
+  @include mono;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.cancelled {
+  text-decoration: line-through;
+  color: var(--ink-3);
+}

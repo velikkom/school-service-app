@@ -1,0 +1,11 @@
+# docs/SECURITY.md: production'da Swagger kapalı varsayılan, SWAGGER_ENABLED ile açıkça kontrol edilir.
+springdoc:
+  api-docs:
+    enabled: ${SWAGGER_ENABLED:false}
+  swagger-ui:
+    enabled: ${SWAGGER_ENABLED:false}
+
+logging:
+  level:
+    root: WARN
+    com.okulservisi.backend: INFO

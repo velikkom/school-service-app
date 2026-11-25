@@ -1,0 +1,91 @@
+@use "tokens" as *;
+
+.page {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s4);
+  max-width: 760px;
+  min-width: 0;
+}
+
+.tap {
+  min-height: var(--tap) !important;
+}
+
+.filter {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) auto;
+  gap: var(--s3);
+  align-items: end;
+
+  @include narrow {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  @include mobile {
+    > button {
+      grid-column: 1 / -1;
+      justify-content: center;
+    }
+  }
+}
+
+.list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--s3);
+}
+
+.item {
+  @include card;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: var(--s4);
+  min-width: 0;
+}
+
+.itemHead {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--s2);
+  flex-wrap: wrap;
+}
+
+.events {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.event {
+  display: flex;
+  align-items: center;
+  gap: var(--s2);
+  flex-wrap: wrap;
+  font-size: var(--fs-sm);
+}
+
+.reason {
+  color: var(--ink-2);
+  font-style: italic;
+  overflow-wrap: anywhere;
+}
+
+.itemFoot {
+  display: flex;
+  justify-content: flex-end;
+  border-top: 1px solid var(--line);
+  padding-top: var(--s2);
+
+  @include mobile {
+    > button {
+      width: 100%;
+      justify-content: center;
+    }
+  }
+}

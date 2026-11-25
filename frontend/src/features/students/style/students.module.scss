@@ -1,0 +1,59 @@
+@use "tokens" as *;
+
+.head {
+  @include card;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--s3);
+  padding: var(--s4) var(--s5) 0;
+  overflow: hidden;
+
+  @include mobile {
+    padding: var(--s4) var(--s4) 0;
+  }
+}
+
+.headMain {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--s3);
+  min-width: 0;
+}
+
+.headText {
+  min-width: 0;
+}
+
+.headTitle {
+  font-size: var(--fs-xl);
+  font-weight: 800;
+  margin: 0;
+  overflow-wrap: anywhere;
+}
+
+.tabs {
+  flex: 1 1 100%;
+  min-width: 0;
+  overflow-x: auto;
+
+  :global(.p-tabmenu-nav) {
+    border-bottom: 0;
+    flex-wrap: nowrap;
+  }
+}
+
+.rangeField {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-weight: 700;
+  color: var(--ink-2);
+}
+
+.struck {
+  text-decoration: line-through;
+  color: var(--ink-3);
+}

@@ -1,0 +1,10 @@
+.center {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  padding: 16px;
+
+  > * {
+    width: min(560px, 100%);
+  }
+}

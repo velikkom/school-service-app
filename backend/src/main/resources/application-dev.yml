@@ -1,0 +1,9 @@
+logging:
+  level:
+    com.okulservisi.backend: DEBUG
+
+springdoc:
+  api-docs:
+    enabled: ${SWAGGER_ENABLED:true}
+  swagger-ui:
+    enabled: ${SWAGGER_ENABLED:true}

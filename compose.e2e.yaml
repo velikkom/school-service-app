@@ -1,0 +1,36 @@
+# Sprint 3 — Yalnız E2E testlerine ayrılmış, tek kullanımlık ortam (bkz. docs/design/SPRINT3_DELIVERY.md).
+# Günlük geliştirme ortamından (compose.yaml: ssp-postgres / ssp-mailpit, ssp_postgres_data volume'u) TAMAMEN
+# ayrıdır: farklı compose projesi (ssp-e2e), farklı container adları, farklı portlar, kalıcı volume YOK
+# (veri tmpfs'te tutulur; container kaldırılınca biter). Portlar yalnız 127.0.0.1'e bağlanır.
+#
+# Doğrudan çalıştırmayın; scripts\e2e.ps1 rastgele parola üretip bu dosyayı kullanır:
+#   docker compose -p ssp-e2e -f compose.e2e.yaml up -d --wait
+name: ssp-e2e
+
+services:
+  postgres:
+    image: postgres:16.4
+    container_name: ssp-e2e-postgres
+    environment:
+      POSTGRES_DB: ssp_e2e
+      POSTGRES_USER: ssp_e2e
+      POSTGRES_PASSWORD: ${E2E_DB_PASSWORD:?E2E_DB_PASSWORD scripts/e2e.ps1 tarafindan uretilir}
+    ports:
+      - "127.0.0.1:${E2E_DB_PORT:-55434}:5432"
+    tmpfs:
+      - /var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ssp_e2e -d ssp_e2e"]
+      interval: 2s
+      timeout: 3s
+      retries: 30
+
+  mailpit:
+    image: axllent/mailpit:v1.21.3
+    container_name: ssp-e2e-mailpit
+    # Mailpit varsayılan olarak hiçbir postayı dışarı aktarmaz (relay tanımlı değil); test postası burada kalır.
+    environment:
+      MP_MAX_MESSAGES: "2000"
+    ports:
+      - "127.0.0.1:${E2E_MAIL_SMTP_PORT:-11025}:1025"
+      - "127.0.0.1:${E2E_MAIL_UI_PORT:-18025}:8025"
