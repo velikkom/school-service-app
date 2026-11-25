@@ -3,7 +3,7 @@ name: school-service-platform
 services:
   postgres:
     image: postgres:16.4
-    container_name: ssp-postgres
+    container_name: ssp-postgres${DEV_RESOURCE_SUFFIX:-}
     restart: unless-stopped
     environment:
       POSTGRES_DB: ${POSTGRES_DB:-school_service}
@@ -21,7 +21,7 @@ services:
 
   mailpit:
     image: axllent/mailpit:v1.21.3
-    container_name: ssp-mailpit
+    container_name: ssp-mailpit${DEV_RESOURCE_SUFFIX:-}
     restart: unless-stopped
     ports:
       - "${MAILPIT_SMTP_PORT:-1025}:1025"
@@ -29,4 +29,4 @@ services:
 
 volumes:
   ssp_postgres_data:
-    name: ssp_postgres_data
+    name: ssp_postgres_data${DEV_RESOURCE_SUFFIX:-}
