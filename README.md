@@ -76,15 +76,20 @@ The acceptance runs used Spring Boot, an isolated PostgreSQL database, and Mailp
 
 Prerequisites are JDK 17, Node.js 20.19+, Docker Desktop, and PowerShell.
 
-From the repository root, create the local configuration files and start PostgreSQL and Mailpit. Replace the placeholder secrets in `.env` (`JWT_SECRET`, `BFF_COOKIE_SECRET`, `BOOTSTRAP_ADMIN_PASSWORD`) and copy the same `BFF_COOKIE_SECRET` into `frontend/.env.local`. Neither file is committed.
+From the repository root, create the local configuration files for PostgreSQL, Mailpit, and the application. Replace the placeholder secrets in `.env` (`JWT_SECRET`, `BFF_COOKIE_SECRET`, `BOOTSTRAP_ADMIN_PASSWORD`) and copy the same `BFF_COOKIE_SECRET` into `frontend/.env.local`. Neither file is committed.
 
 ```powershell
 Copy-Item .env.example .env
 Copy-Item frontend\.env.example frontend\.env.local
+```
+
+After editing the files, start PostgreSQL and Mailpit:
+
+```powershell
 docker compose --env-file .env up -d
 ```
 
-Start the backend:
+Start the backend. Maven downloads dependencies on the first run:
 
 ```powershell
 powershell -ExecutionPolicy Bypass -File scripts\start-backend.ps1
@@ -103,6 +108,36 @@ Open `http://localhost:3000`. For two isolated acceptance runs, execute this com
 ```powershell
 powershell -ExecutionPolicy Bypass -File scripts\e2e.ps1 -Runs 2
 ```
+
+### Run a second local checkout
+
+If another ServisFlow instance is already running, use a separate Compose project and PostgreSQL volume. In the second checkout's root `.env`, set the following values after checking that the ports are free:
+
+```dotenv
+DEV_RESOURCE_SUFFIX=-clean
+POSTGRES_PORT=55435
+DB_URL=jdbc:postgresql://localhost:55435/school_service
+MAILPIT_SMTP_PORT=11026
+MAILPIT_UI_PORT=18026
+MAIL_PORT=11026
+SERVER_PORT=18081
+RESET_PASSWORD_BASE_URL=http://localhost:3101/sifre-sifirla
+REGISTRATION_VERIFICATION_BASE_URL=http://localhost:3101/e-posta-dogrula
+OAUTH_REDIRECT_BASE_URL=http://localhost:3101
+```
+
+Set `BACKEND_INTERNAL_URL=http://localhost:18081` and `OAUTH_REDIRECT_BASE_URL=http://localhost:3101` in the second checkout's `frontend/.env.local`. Start Compose with the separate project name, run the backend script from the same root, and start Next.js on port 3101:
+
+```powershell
+docker compose -p ssp-clean --env-file .env up -d --wait
+powershell -ExecutionPolicy Bypass -File scripts\start-backend.ps1
+# In a second window, from the second checkout:
+cd frontend
+npm ci
+npm run dev -- --port 3101
+```
+
+Open `http://localhost:3101`. To stop PostgreSQL and Mailpit for this checkout while retaining its volume, run `docker compose -p ssp-clean --env-file .env down` from its root.
 
 ## Release status
 
